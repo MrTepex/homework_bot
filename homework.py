@@ -37,13 +37,13 @@ logging.basicConfig(
 
 
 def send_message(bot, message):
-    """Функция отправки сообщения в чат телеграм"""
+    """Функция отправки сообщения в чат телеграм."""
     bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
     logging.info(f'В телеграм отправлено сообщение: "{message}"')
 
 
 def get_api_answer(current_timestamp):
-    """Функция получения ответа от API"""
+    """Функция получения ответа от API."""
     logging.info('Запрос к ЯП передан')
     timestamp = current_timestamp
     params = {'from_date': timestamp}
@@ -58,7 +58,7 @@ def get_api_answer(current_timestamp):
 
 
 def check_response(response):
-    """Запрос ответа от API ЯП"""
+    """Запрос ответа от API ЯП."""
     if isinstance(response, dict):
         if 'homeworks' in response.keys():
             homeworks = response.get('homeworks')
@@ -73,7 +73,7 @@ def check_response(response):
 
 
 def parse_status(homework):
-    """Парсинг названия домашней работы и ее статуса"""
+    """Парсинг названия домашней работы и ее статуса."""
     homework_name = homework.get('homework_name')
     homework_status = homework.get('status')
     verdict = HOMEWORK_STATUSES[homework_status]
@@ -81,7 +81,7 @@ def parse_status(homework):
 
 
 def check_tokens():
-    """Проверка корректности переменных окружения"""
+    """Проверка корректности переменных окружения."""
     if not (PRACTICUM_TOKEN and TELEGRAM_TOKEN and TELEGRAM_CHAT_ID):
         return False
     return True
