@@ -96,18 +96,19 @@ def main():
                 homework = check_response(response)[0]
                 if tmp_status != homework.get('status'):
                     message = parse_status(homework)
+                    tmp_status = homework.get('status')
                     if tmp_message != message:
                         send_message(bot, message)
-                    tmp_status = homework.get('status')
                 else:
                     logging.info('Статус работы не изменился, следующий запрос'
                                  ' через 10 минут')
+            except IndexError:
+                logging.info('Ответ от API - пустой список. '
+                             'Работа еще не взята на проверку.')
             except Exception as error:
                 message = f'Сбой в работе программы: {error}'
                 logging.error(message)
                 send_message(bot, message)
-            except IndexError:
-                logging.info('Ответ от API - пустой список')
             finally:
                 time.sleep(RETRY_TIME)
     else:
