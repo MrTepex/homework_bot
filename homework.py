@@ -61,7 +61,6 @@ def get_api_answer(current_timestamp):
                               f'{error}')
 
 
-
 def check_response(response):
     """Запрос ответа от API ЯП."""
     logging.info('Начат процесс проверки ответа сервера ЯП')
