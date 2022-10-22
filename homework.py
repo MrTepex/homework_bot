@@ -9,7 +9,8 @@ import telegram
 from dotenv import load_dotenv
 from http import HTTPStatus
 
-from exceptions import ConnectionError, ObjectIsNoneError, TelegramError
+from exceptions import ConnectionError, ObjectIsNoneError, TelegramError, \
+    WrongAPIResponseCodeError
 
 load_dotenv()
 
@@ -36,7 +37,6 @@ def send_message(bot, message):
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
     except telegram.error.TelegramError as error:
         message = f'Ошибка отправки сообщения в телеграм, {error}'
-        logging.error(message)
         raise TelegramError(message)
     logging.info(f'В телеграм отправлено сообщение: "{message}"')
 
@@ -51,12 +51,15 @@ def get_api_answer(current_timestamp):
                                 headers=HEADERS,
                                 params=params)
         if response.status_code != HTTPStatus.OK:
-            logging.error(f'Ответ от сервера не соответствует ожиданию: '
-                          f'({response.status_code}, {response.text}')
+            raise WrongAPIResponseCodeError(f'Ответ от сервера не '
+                                            f'соответствует ожиданию: '
+                                            f'({response.status_code}, '
+                                            f'{response.text}) ')
+        return response.json()
     except Exception as error:
         raise ConnectionError(f'Ответ от сервера не соответствует ожиданию: '
                               f'{error}')
-    return response.json()
+
 
 
 def check_response(response):

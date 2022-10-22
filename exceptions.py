@@ -16,3 +16,7 @@ class ConnectionError(Error):
 class ObjectIsNoneError(Error):
     """Ошибка отсутствия имени или статуса работы"""
     pass
+
+class WrongAPIResponseCodeError(Error):
+    """Ошибка неверного ответа сервера"""
+    pass
