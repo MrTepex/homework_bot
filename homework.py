@@ -21,7 +21,7 @@ TELEGRAM_CHAT_ID: str = os.getenv('TELEGRAM_CHAT_ID')
 RETRY_TIME: int = int(os.getenv('RETRY_TIME', 600))
 ENDPOINT: str = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
 HEADERS: dict = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
-TIMESTAMP: int = 1666340679
+TIMESTAMP: int = int(time.time())
 
 HOMEWORK_VERDICTS: dict = {
     'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
