@@ -8,6 +8,4 @@
 - Telegram-bot
 
 ### Автор
-_Михаил Терехов_ 
-
-https://github.com/MrTepex/
+- [Mikhail Terekhov](https://github.com/MrTepex)
